@@ -17,18 +17,15 @@ with(open('election_dataTest.csv',mode="r")) as results:
             totalVote = candidates[curCan] + 1
             #assign candidates new vote total in dictionary
             candidates[curCan] = totalVote
-        else:
+        else: #if not, add them
           candidates[vote[2]] = 1  
-          #if not, add them
-          #if so, add vote for them
-        
+                    
     def printWrite(theString,fileName):
         print(theString)
         fileName.write(theString)
     
     theFileName = "electionResults.txt"
     winnerNum = 0
-    #winnerName = ""
     outDivide = "\n-------------------------\n"
     outTitle = "\nElection Results" + "\n" + outDivide
     outTotalVotes = f"Total Votes: {total_votes}" + outDivide
@@ -37,9 +34,6 @@ with(open('election_dataTest.csv',mode="r")) as results:
         printWrite(outTitle,output)
         printWrite(outTotalVotes,output)
        
-    #print("\nElection Results" + "\n" + "-------------------------")
-    #print(f"Total Votes: {total_votes}")  
-    #print("-------------------------")
         for cand,voteTotal in candidates.items():
             printWrite(f"{cand}: {str(round((voteTotal/total_votes)*100,3))}% ({voteTotal})\n",output)
             if voteTotal > winnerNum:
@@ -47,10 +41,9 @@ with(open('election_dataTest.csv',mode="r")) as results:
                 winnerName = cand
             
         printWrite(outDivide,output)
-        #print("-------------------------")
         printWrite(f"Winner: {winnerName}",output)
         printWrite(outDivide,output)
-        #print("-------------------------\n")
+        
 
 
 
