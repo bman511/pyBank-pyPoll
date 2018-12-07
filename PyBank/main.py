@@ -1,6 +1,7 @@
+#PyBank analysis
 import csv
 #import math
-
+#edit
 
 months_count = 0
 net_total = 0
@@ -27,11 +28,20 @@ with open('budget_data.csv', mode='r') as budget:
         elif(int(row[1]) < greatest_decrease[0]):
             greatest_decrease = [int(row[1]),row[0]]
                 
+resultsArr = ["\nFinancial Analysis\n-----------------",
+             f"Total Months: {months_count}\n",
+             f"Total: ${net_total}\n",
+             f"Average Change: ${round(net_total/months_count,2)}\n",
+             f"Greatest Increase in Profits: {greatest_increase[1]} (${greatest_increase[0]})\n",
+             f"Greatest Decrease in Profits: {greatest_decrease[1]} (${greatest_decrease[0]})\n",
+             "-----------------" ]
 
-print(str(months_count) + "\n")
-print(str(net_total)+"\n")
-average_change = net_total/months_count
-print(f"{round(average_change,2)}\n")
-print(f"{greatest_increase[0]} - {greatest_increase[1]}\n")
-print(f"{greatest_decrease[0]} - {greatest_decrease[1]}\n")
+for string in resultsArr:
+    print(string)
+# print(str(months_count) + "\n")
+# print(str(net_total)+"\n")
+# average_change = net_total/months_count
+# print(f"{round(average_change,2)}\n")
+# print(f"{greatest_increase[0]} - {greatest_increase[1]}\n")
+# print(f"{greatest_decrease[0]} - {greatest_decrease[1]}\n")
 #newline='\n', optional for open(), no change if included
