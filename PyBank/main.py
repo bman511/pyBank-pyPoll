@@ -30,7 +30,7 @@ with open('budget_data.csv', mode='r') as budget:
             changeOverSum += int(changeArr[1])-int(changeArr[0])
             #print(changeOverSum)
     def printWrite(theString,fileName):
-        print(theString)
+        #print(theString)
         fileName.write(theString)
     
     theFileName = "budgetResults.txt"
