@@ -5,11 +5,14 @@ import csv
 total_votes = 0
 candidates = {}
 
-with(open('election_dataTest.csv',mode="r")) as results:
+with open('election_data.csv',mode="r") as results:
     el_results = csv.reader(results,delimiter=",")
-    #next(el_results,None)
+    #skip headers
+    next(el_results,None)
     for vote in el_results:
+        #tally total votes
         total_votes += 1
+        #check if candidate has already been added to dictionary
         if candidates.get(vote[2]):
             #assign current candidates name to variable
             curCan = vote[2] 
@@ -17,9 +20,9 @@ with(open('election_dataTest.csv',mode="r")) as results:
             totalVote = candidates[curCan] + 1
             #assign candidates new vote total in dictionary
             candidates[curCan] = totalVote
-        else: #if not, add them
+        else: #if candidate is not present, add them and give them one vote
           candidates[vote[2]] = 1  
-                    
+     #define function to print and write string               
     def printWrite(theString,fileName):
         print(theString)
         fileName.write(theString)
@@ -29,13 +32,14 @@ with(open('election_dataTest.csv',mode="r")) as results:
     outDivide = "\n-------------------------\n"
     outTitle = "\nElection Results" + "\n" + outDivide
     outTotalVotes = f"Total Votes: {total_votes}" + outDivide
-    
+    #create output file and print/write above variables
     with open(theFileName,"w") as output:
         printWrite(outTitle,output)
         printWrite(outTotalVotes,output)
-       
+        #iterate through dictionary and print candidate and votes       
         for cand,voteTotal in candidates.items():
             printWrite(f"{cand}: {str(round((voteTotal/total_votes)*100,3))}% ({voteTotal})\n",output)
+            #assign highest votes to corresponding candidate
             if voteTotal > winnerNum:
                 winnerNum = voteTotal
                 winnerName = cand
